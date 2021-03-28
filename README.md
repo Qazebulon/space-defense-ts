@@ -1,3 +1,42 @@
+# Instructions
+
+### Objective
+You are the blue circle in the center of the screen.
+The objective of the game is to prevent the enemies from touching you.
+You can hold down the left mouse button to fire and aim by moving the mouse.
+Each hit will damage the enemy and make it smaller until it is destroyed.
+Enemies spawn at the edges of the screen and move towards the center.
+
+### Scoring
+You gain 5 points per hit and another 5 points per enemy destroyed, but loss 5 points per miss
+
+Good luck!
+
+
+
+## Improvements under consideration
+
+- Make game easier for testers
+- add scaling difficultly
+- add menu options
+- add upgrades
+- add firing types...
+- refactor...
+
+- accuracy, etc...
+- ammo count, recharge rate, etc.
+
+- enemy types
+- auto-turrets
+- AI
+- Switch sides...
+- Multi-player...
+
+- add achievements
+- add levels
+
+---------------------------
+
 # New Project
 
 > ✨ Bootstrapped with Create Snowpack App (CSA).
