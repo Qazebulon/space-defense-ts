@@ -15,7 +15,12 @@
         <span>Score: </span>
         <span id="scoreEl">0</span>
     </div>
-    
+
+    <div class="fixed text-white text-sm mr-2 mt-1 right-0 select-none">
+        <span>Wave: </span>
+        <span id="waveEl">1</span>
+    </div>
+
     <div class="fixed inset-0 flex items-center justify-center" id="modalEl">
         <div class="bg-white max-w-md w-full p-6 text-center">
             <h1 class="text-4xl font-bold leading-none" id="modalScoreEl">0</h1>
@@ -25,7 +30,13 @@
                 text-sm outline-none focus:ring focus:border-blue-300" id="startBtn">Start Game</button>
             </div>
         </div>
-    </div>    
+    </div>
+    
+    <div class="fixed flex items-center justify-center w-full h-10 bottom-0 text-center">
+        <button class="hidden p-1 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeSizeBtn">Upgrade Projectile Size</button>
+        <button class="hidden p-1 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeVelocityBtn">Upgrade Projectile Velocity</button>
+        <button class="hidden p-1 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeROFBtn">Upgrade Rate of Fire</button>
+    </div>
     
     <canvas id="canvas"></canvas>
     <noscript>You need to enable JavaScript to run this app.</noscript>

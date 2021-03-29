@@ -1,31 +1,30 @@
 const scoreEl: any = document.querySelector('#scoreEl');
+const upgradeSizeBtn: any = document.querySelector('#upgradeSizeBtn');
+const upgradeVelocityBtn: any = document.querySelector('#upgradeVelocityBtn');
+const upgradeROFBtn: any = document.querySelector('#upgradeROFBtn');
 
 export class Score {
-	score: number;
+	value: number;
 	constructor() {
-		this.score = 0;
+		this.value = 0;
 		scoreEl!.innerHTML = '0';
 	}
 	clearScore() {
-		this.score = 0;
+		this.value = 0;
 		this.updateScore();
 	}
 	increaseScore(delta: number) {
-		this.score += delta;
-		// if(this.score > 100){
-		//     // player.blaster.ammo.coolDown -= 100;
-		//     this.score = 0;
-		// }
+		this.value += delta;
 		this.updateScore();
 	}
 	decreaseScore(delta: number) {
-		this.score -= delta;
-		if (this.score < 0) {
-			this.score = 0;
+		this.value -= delta;
+		if (this.value < 0) {
+			this.value = 0;
 		}
 		this.updateScore();
 	}
 	updateScore() {
-		scoreEl!.innerHTML = this.score.toString();
+		scoreEl!.innerHTML = this.value.toString();
 	}
 }

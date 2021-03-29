@@ -2,22 +2,30 @@ import type { Player } from '../player/player';
 import { Particle } from '../utility/particle';
 import { gsap } from "gsap";
 
+const MINIMUM_ENEMY_SIZE = 10;
+const waveEl: any = document.querySelector('#waveEl');
 export class Enemy {
 	static enemies: Enemy[] = [];
-	static spawnInterval: number;
+	static spawnIntervalId: number;
+	static spawnInterval = 3000;
+	static totalCreated = 0;
+	static deltaCreated = 0;
+	static wave = 1;
 	static particles: Particle[] = [];
 	x: number;
 	y: number;
 	radius: number;
 	color: unknown;
 	velocity: any;
-	// context: any;
+	number: number;
+	// context: any; // TODO: switch back to having context here...
 	constructor(x: number, y: number, radius: number, color: string, velocity: any) {
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
 		this.color = color;
 		this.velocity = velocity;
+		this.number = Enemy.totalCreated++;
 	}
 
 	draw(context: any): void {
@@ -33,18 +41,25 @@ export class Enemy {
 		this.y = this.y + this.velocity.y;
 	}
 
+	remove(index: number): void {
+		if(Enemy.enemies[index]?.number == this.number){
+			Enemy.enemies.splice(index, 1);
+		}
+	}
+
 	////////////////////////////////////////
 
 	static spawnEnemies(centerX: number, centerY: number, canvas: any): void {
-		this.spawnInterval = setInterval(() => {
+		Enemy.spawnIntervalId = setInterval(() => {
 			this.spawnEnemy(centerX, centerY, canvas);
-		}, 2000);
+		}, Enemy.spawnInterval);
 	}
 
 	// TODO: revisit spawning rules...
 	static spawnEnemy(centerX: number, centerY: number, canvas: any): void {
-		const radius = Math.random() * 20 + 10;
-		const velocityScaler = Math.random() * 1 + 0.5;
+		Enemy.deltaCreated++;
+		const radius = Math.random() * (5 * Enemy.wave) + (5 * Enemy.wave) + 10;
+		const velocityScaler = Math.random() * 1 + (0.2 * Enemy.wave) + 0.2;
 		let x;
 		let y;
 		if (Math.random() < 0.5) {
@@ -60,12 +75,25 @@ export class Enemy {
 			x: Math.cos(angle) * velocityScaler,
 			y: Math.sin(angle) * velocityScaler
 		};
-		this.enemies.push(new Enemy(x, y, radius, color, velocity));
+		Enemy.enemies.push(new Enemy(x, y, radius, color, velocity));
+		if(Enemy.deltaCreated > 10) {
+			Enemy.deltaCreated = 0;
+			Enemy.wave++;
+			waveEl!.innerHTML = this.wave.toString();
+			Enemy.spawnInterval -= 10; // TODO: handle underflow at some point...
+			clearInterval(Enemy.spawnIntervalId);
+			Enemy.spawnEnemies(centerX, centerY, canvas);
+		}
 	}
 
 	static clearEnemies() {
-		clearInterval(this.spawnInterval);
-		this.enemies = [];
+		clearInterval(Enemy.spawnIntervalId);
+		Enemy.enemies = [];
+		Enemy.spawnInterval = 3000;
+		Enemy.totalCreated = 0;
+		Enemy.deltaCreated = 0;
+		Enemy.wave = 1;
+		Enemy.particles = [];
 	}
 
 	// Was working here...
@@ -100,7 +128,7 @@ export class Enemy {
 							)
 						);
 					}
-					if (enemy.radius > 10 + projectile.radius) {
+					if (enemy.radius > MINIMUM_ENEMY_SIZE + projectile.radius) {
 						player.score.increaseScore(projectile.radius);
 						gsap.to(enemy, {
 							radius: enemy.radius - projectile.radius
@@ -109,9 +137,9 @@ export class Enemy {
 							player.blaster.projectiles.splice(projectileIndex, 1);
 						}, 0);
 					} else {
-						player.score.increaseScore(projectile.radius * 2);
+						player.score.increaseScore(MINIMUM_ENEMY_SIZE * 3);
 						setTimeout(() => {
-							Enemy.enemies.splice(index, 1);
+							enemy.remove(index);
 							player.blaster.projectiles.splice(projectileIndex, 1);
 						}, 0);
 					}

@@ -2,19 +2,19 @@ import { Blaster } from './blaster';
 import { Score } from './score';
 
 export class Player {
+	context: any;
 	x: number;
 	y: number;
 	radius: number;
 	color: unknown;
-	context: any;
 	blaster: Blaster;
 	score: Score;
 	constructor(x: number, y: number, radius: number, color: unknown, context: any) {
+		this.context = context;
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
 		this.color = color;
-		this.context = context;
 		this.blaster = new Blaster(context, x, y);
 		this.score = new Score();
 	}
