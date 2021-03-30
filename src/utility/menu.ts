@@ -9,7 +9,7 @@ export class Menu {
 		startBtn!.addEventListener('click', () => this.hide());
 	}
 	show(score: number) {
-		modalScoreEl!.innerHTML = score.toString();
+		modalScoreEl!.innerHTML = (score - 1).toString();
 		modalEl!.style.display = 'flex';
 	}
 	hide() {

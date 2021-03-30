@@ -58,8 +58,8 @@ export class Enemy {
 	// TODO: revisit spawning rules...
 	static spawnEnemy(centerX: number, centerY: number, canvas: any): void {
 		Enemy.deltaCreated++;
-		const radius = Math.random() * (5 * Enemy.wave) + (5 * Enemy.wave) + 10;
-		const velocityScaler = Math.random() * 1 + (0.2 * Enemy.wave) + 0.2;
+		const radius = Math.random() * (3 * Enemy.wave) + (4 * Enemy.wave) + 15;
+		const velocityScaler = Math.random() * 0.25 + (0.3 * Enemy.wave) + 0.25;
 		let x;
 		let y;
 		if (Math.random() < 0.5) {
@@ -93,6 +93,7 @@ export class Enemy {
 		Enemy.totalCreated = 0;
 		Enemy.deltaCreated = 0;
 		Enemy.wave = 1;
+		waveEl!.innerHTML = this.wave.toString();
 		Enemy.particles = [];
 	}
 
@@ -111,7 +112,7 @@ export class Enemy {
 				const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
 				if (dist < enemy.radius + projectile.radius) {
 					// Hit
-					const numberOfParticles = Math.random() * enemy.radius;
+					const numberOfParticles = Math.random() * enemy.radius / 2 + Math.random() * projectile.radius / 2;
 					for (let i = 0; i < numberOfParticles; i++) {
 						const particleSize = Math.random() * projectile.radius;
 						Enemy.particles.push(
@@ -128,16 +129,17 @@ export class Enemy {
 							)
 						);
 					}
-					if (enemy.radius > MINIMUM_ENEMY_SIZE + projectile.radius) {
-						player.score.increaseScore(projectile.radius);
+					const damage = projectile.radius * player.blaster.ammo.color.level;
+					if (enemy.radius > MINIMUM_ENEMY_SIZE + damage) {
+						player.points.increasePoints(damage);
 						gsap.to(enemy, {
-							radius: enemy.radius - projectile.radius
+							radius: enemy.radius - damage
 						});
 						setTimeout(() => {
 							player.blaster.projectiles.splice(projectileIndex, 1);
 						}, 0);
 					} else {
-						player.score.increaseScore(MINIMUM_ENEMY_SIZE * 3);
+						player.points.increasePoints(damage * 5);
 						setTimeout(() => {
 							enemy.remove(index);
 							player.blaster.projectiles.splice(projectileIndex, 1);

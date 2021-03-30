@@ -2,6 +2,7 @@ import { Projectile } from '../utility/projectile';
 import type { AmmoType } from './ammo';
 
 export class Blaster {
+	colors = ['black', 'red', 'orange', 'yellow', 'light-green', 'blue', 'purple', 'white'];
 	context: any;
 	x: number;
 	y: number;
@@ -17,12 +18,10 @@ export class Blaster {
 		this.isTriggerDown = false;
 		this.isAmmoReady = true;
 		this.ammo = {
-			name: 'standard',
-			level: { size: 1, velocity: 1, rateOfFire: 1 },
-			radius: 5, // upgrade +1 for 100 points per level?
-			color: 'red', // changes every 5 upgrades?
-			velocity: 5, // upgrade +1 for 100 points per level?
-			coolDown: 500 // upgrade -10 for 100 points per level?
+			size: {value: 5, cost: 45, level: 1, max: 30},
+			velocity: {value: 5, cost: 20, level: 1, max: 20},
+			coolDown: {value: 1000, cost: 75, level: 1, max: 19},
+			color: {value: this.colors[1], cost: 1000, level: 1, max: 7}
 		};
 		this.targetingVector = { x: 0, y: 5 };
 		this.projectiles = [];
@@ -49,8 +48,8 @@ export class Blaster {
 	targetChanged(event: any): void {
 		const angle = Math.atan2(event.clientY - this.y, event.clientX - this.x);
 		this.targetingVector = {
-			x: Math.cos(angle) * this.ammo.velocity,
-			y: Math.sin(angle) * this.ammo.velocity
+			x: Math.cos(angle) * this.ammo.velocity.value,
+			y: Math.sin(angle) * this.ammo.velocity.value
 		};
 	}
 	attemptToFireProjectile() {
@@ -68,10 +67,10 @@ export class Blaster {
 	fireProjectile(): void {
 		// Start coolDown timer
 		this.isAmmoReady = false;
-		setTimeout(() => (this.isAmmoReady = true), this.ammo.coolDown);
+		setTimeout(() => (this.isAmmoReady = true), this.ammo.coolDown.value);
 
 		// Add new projectile
-		const p = new Projectile(this.x, this.y, this.ammo.radius, this.ammo.color, this.targetingVector, this.context);
+		const p = new Projectile(this.x, this.y, this.ammo.size.value, this.ammo.color.value, this.targetingVector, this.context);
 		setTimeout(() => this.projectiles.push(p), 0);
 	}
 	checkUpgrade(score: number): void {

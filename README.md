@@ -8,11 +8,42 @@ Each hit will damage the enemy and make it smaller until it is destroyed.
 Enemies spawn at the edges of the screen and move towards the center.
 
 ### Scoring
-You gain 5 points per hit and another 5 points per enemy destroyed, but loss 5 points per miss
+You gain points per hit and another bonus points per enemy destroyed, but loss points if your shot gets to the edge of the map without hitting an enemy (miss).
 
 Good luck!
 
+## Last Test
+---
+- Delayed explosions
+- enemies get big, but aren't "boss-like" enough... they just are normal
+- not enough enemies spawning at wave 25... let the enemies "rank up" at wave 10, 20, etc.
+- reset basic ammo upgrades on type upgrade? (remove velocity upgrades? auto with type?)
+- difficultly modes? 
+    - Beginner (no accuracy penalty, game pauses on upgrade availability? -- starts at wave 1 stats???)
+    - Novice (current mode, no pause on upgrade available -- starts wave 5???)
+    - Expert (miss equals death! -- starts at rank 2???)
+- graphics upgrade required... ? (simple sprites)
+---
+- add more enemies that spawn and don't lock on you... (opportunity for points / distractions -> more skill differentiation...)
+- attempt to correlate
+    - CD with Enemy spawn rate... [not directly]
+    - Damage with Enemy size
+    - velocity... not sure (possibly it is a "risk"/investment to get more from the distractions...)
+- FUTURE: maybe add enemy resistances and ability to swap between weapon types or stronger weapons with limited ammo... etc.
+- FUTURE: multiplayer
+    - Score contest...
+    - Team defense
+    - Head to head?
+    - ...
+- Cap projectile size at turret size?
+- increase turret size on upgrade?
+- Particle system update... more smaller particles and some large...
+- Social Media "Indi" presence? Weekly updates w/ Patreon or similar?
+---
+## Known Issues
 
+- Delayed explosion on enemy death
+- upgrades sometimes don't show even when they are affordable...
 
 ## Improvements under consideration
 

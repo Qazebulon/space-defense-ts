@@ -1,30 +1,30 @@
-const scoreEl: any = document.querySelector('#scoreEl');
+const pointsEl: any = document.querySelector('#pointsEl');
 const upgradeSizeBtn: any = document.querySelector('#upgradeSizeBtn');
 const upgradeVelocityBtn: any = document.querySelector('#upgradeVelocityBtn');
 const upgradeROFBtn: any = document.querySelector('#upgradeROFBtn');
 
-export class Score {
+export class Points {
 	value: number;
 	constructor() {
 		this.value = 0;
-		scoreEl!.innerHTML = '0';
+		pointsEl!.innerHTML = '0';
 	}
-	clearScore() {
+	clearPoints() {
 		this.value = 0;
-		this.updateScore();
+		this.updatePoints();
 	}
-	increaseScore(delta: number) {
+	increasePoints(delta: number) {
 		this.value += delta;
-		this.updateScore();
+		this.updatePoints();
 	}
-	decreaseScore(delta: number) {
+	decreasePoints(delta: number) {
 		this.value -= delta;
 		if (this.value < 0) {
 			this.value = 0;
 		}
-		this.updateScore();
+		this.updatePoints();
 	}
-	updateScore() {
-		scoreEl!.innerHTML = this.value.toString();
+	updatePoints() {
+		pointsEl!.innerHTML = this.value.toString();
 	}
 }
