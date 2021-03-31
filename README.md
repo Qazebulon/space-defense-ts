@@ -38,7 +38,7 @@ Good luck!
 - Cap projectile size at turret size?
 - increase turret size on upgrade?
 - Particle system update... more smaller particles and some large...
-- Social Media "Indi" presence? Weekly updates w/ Patreon or similar?
+- Social Media presence? Weekly updates w/ Patreon or similar?
 ---
 ## Known Issues
 

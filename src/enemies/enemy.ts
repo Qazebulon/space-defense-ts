@@ -50,7 +50,7 @@ export class Enemy {
 	////////////////////////////////////////
 
 	static spawnEnemies(centerX: number, centerY: number, canvas: any): void {
-		Enemy.spawnIntervalId = setInterval(() => {
+		Enemy.spawnIntervalId = window.setInterval(() => {
 			this.spawnEnemy(centerX, centerY, canvas);
 		}, Enemy.spawnInterval);
 	}
