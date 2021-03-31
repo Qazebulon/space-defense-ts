@@ -112,15 +112,20 @@ export class Enemy {
 				const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
 				if (dist < enemy.radius + projectile.radius) {
 					// Hit
-					const numberOfParticles = Math.random() * enemy.radius / 2 + Math.random() * projectile.radius / 2;
+					const numberOfParticles = Math.random() * enemy.radius / 2 + projectile.radius / 2;
 					for (let i = 0; i < numberOfParticles; i++) {
-						const particleSize = Math.random() * projectile.radius;
+						let particleSize;
+						if(Math.random() > 0.3){
+							particleSize = Math.random() * projectile.radius / 2;
+						} else {
+							particleSize = Math.random() * projectile.radius;
+						}
 						Enemy.particles.push(
 							new Particle(
 								projectile.x,
 								projectile.y,
 								particleSize,
-								enemy.color,
+								'yellow',
 								{
 									x: (Math.random() - 0.5) * projectile.radius,
 									y: (Math.random() - 0.5) * projectile.radius
