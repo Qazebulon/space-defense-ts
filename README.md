@@ -3,14 +3,18 @@
 ### Objective
 You are the blue circle in the center of the screen.
 The objective of the game is to prevent the enemies from touching you.
-You can hold down the left mouse button to fire and aim by moving the mouse.
+You can hold down the mouse button or press spacebar to fire and aim by moving the mouse.
 Each hit will damage the enemy and make it smaller until it is destroyed.
 Enemies spawn at the edges of the screen and move towards the center.
+When you earn enough points, upgrade options will show up at the bottom of the screen.
+You can purchase upgrades by clicking on them or pressing a, d, or f on the keyboard for upgrading projectile size, rate of fire, and ammo type respectively.
 
 ### Scoring
 You gain points per hit and another bonus points per enemy destroyed, but loss points if your shot gets to the edge of the map without hitting an enemy (miss).
 
 Good luck!
+
+Site: https://space-defense.s3.us-east-2.amazonaws.com/index.html
 
 ## Last Test
 ---
