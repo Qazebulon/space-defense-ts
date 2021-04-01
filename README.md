@@ -12,6 +12,10 @@ Good luck!
 
 Game URL: https://space-defense.s3.us-east-2.amazonaws.com/index.html
 
+### Next Update
+
+- Upgrade system update
+
 ---
 # Scratch Notes (Ignore)
 
