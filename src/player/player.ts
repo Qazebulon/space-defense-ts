@@ -18,10 +18,21 @@ export class Player {
 	}
 
 	draw(): void {
-		this.context.beginPath();
-		this.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-		this.context.fillStyle = this.blaster.ammo.color.value;
-		this.context.fill();
+		// this.context.beginPath();
+		// this.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+		// this.context.fillStyle = this.blaster.ammo.color.value;
+		// this.context.fill();
+
+		let img = new Image();
+		let x = this.x;
+		let y = this.y;
+		let d = this.radius * 4;
+		let o = d / 2;
+		let context = this.context;
+		img.src = './base.svg';
+		img.onload = function() {
+			context.drawImage(img, x - o, y - o, d, d);
+		};
 	}
 
 	static newPlayer(centerX: number, centerY: number, context: any): Player {

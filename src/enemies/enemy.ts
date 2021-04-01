@@ -29,10 +29,24 @@ export class Enemy {
 	}
 
 	draw(context: any): void {
-		context.beginPath();
-		context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-		context.fillStyle = this.color;
-		context.fill();
+		// context.beginPath();
+		// context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+		// context.fillStyle = this.color;
+		// context.fill();
+
+		// ctx.drawSvg(SVG_XML_OR_PATH_TO_SVG, dx, dy, dw, dh);
+		// console.log(context);
+		// context.drawSvg("./arctur.svg", this.x, this.y, 2*this.radius, 2*this.radius);
+
+		let img = new Image();
+		let x = this.x;
+		let y = this.y;
+		let d = this.radius*4;
+		let o = d/2;
+		img.src = "./arctur.svg";
+		img.onload = function() {
+    		context.drawImage(img, x - o, y - o, d, d);
+		}
 	}
 
 	update(context: any): void {

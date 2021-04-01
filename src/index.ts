@@ -109,10 +109,11 @@ function animate() {
     }
 
     const ammo = player.blaster.ammo;
+    // Direct velocity and color upgrades are disabled for now...
     upgradeSizeAvailable = (player.points.value > ammo.size.cost * ammo.size.level) && ammo.size.level < ammo.size.max;
     upgradeVelocityAvailable = false; //(player.points.value > ammo.velocity.cost * ammo.velocity.level) && ammo.velocity.level < ammo.velocity.max;
     upgradeROFAvailable = (player.points.value > ammo.coolDown.cost * ammo.coolDown.level) && ammo.coolDown.level < ammo.coolDown.max;
-    upgradeColorAvailable = (player.points.value > ammo.color.cost * ammo.color.level) && ammo.color.level < ammo.color.max;
+    upgradeColorAvailable = false; //(player.points.value > ammo.color.cost * ammo.color.level) && ammo.color.level < ammo.color.max;
     if (upgradeSizeAvailable) {
         setTimeout(() => upgradeSizeBtn.style.display = 'flex', 0);
     } else {
