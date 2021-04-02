@@ -33,10 +33,34 @@
     </div>
     
     <div class="fixed flex items-center justify-center w-full h-10 bottom-2 text-center select-none">
-        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeSizeBtn">Upgrade Projectile Size</button>
-        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeVelocityBtn">Upgrade Projectile Velocity</button>
-        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeROFBtn">Upgrade Rate of Fire</button>
-        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeColorBtn">Upgrade Ammo Type</button>
+        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeSizeBtn">
+            <span>
+                <span class="font-bold">A:</span> Projectile Size Lv 
+                <span id="upgradeSizeLevelEl">2</span> -- 
+                <span id="upgradeSizeCostEl">45</span> Pts
+            </span>
+        </button>
+        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeVelocityBtn">
+            <span>
+                <span class="font-bold">S:</span> Upgrade Projectile Velocity
+                <span id="upgradeVelocityLevelEl">2</span> -- 
+                <span id="upgradeVelocityCostEl">45</span> Pts
+            </span>
+        </button>
+        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeROFBtn">
+            <span>
+                <span class="font-bold">D:</span> Upgrade Rate of Fire
+                <span id="upgradeROFLevelEl">2</span> -- 
+                <span id="upgradeROFCostEl">45</span> Pts
+            </span>
+        </button>
+        <button class="hidden rounded-full p-2 text-white border-2 border-white bg-opacity-10 mr-4 ml-4" id="upgradeColorBtn">
+            <span>
+                <span class="font-bold">F:</span> Upgrade Ammo Type
+                <span id="upgradeColorLevelEl">2</span> -- 
+                <span id="upgradeColorCostEl">45</span> Pts
+            </span>
+        </button>
     </div>
     
     <canvas id="canvas"></canvas>

@@ -1,6 +1,7 @@
 import type { Player } from '../player/player';
 import { Particle } from '../utility/particle';
 import { gsap } from "gsap";
+import type { Vector } from '../utility/types';
 
 const MINIMUM_ENEMY_SIZE = 10;
 const waveEl: any = document.querySelector('#waveEl');
@@ -112,18 +113,17 @@ export class Enemy {
 	}
 
 	// Was working here...
-	static updateEnemies(context: any, player: Player): boolean {
-		let gameOver = false;
+	static updateEnemies(context: any, player: Player, endGame: any): void {
 		// Update Enemies
 		Enemy.enemies.forEach((enemy, index) => {
 			enemy.update(context);
-			const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
-			if (dist < enemy.radius + player.radius) {
-				gameOver = true;
+			const dist = Math.hypot(player.blaster.vector.x - enemy.x, player.blaster.vector.y - enemy.y);
+			if (dist < enemy.radius + player.blaster.radius) {
+				endGame();
 			}
 			// Handle enemy hit
 			player.blaster.projectiles.forEach((projectile, projectileIndex) => {
-				const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+				const dist = Math.hypot(projectile.vector.x - enemy.x, projectile.vector.y - enemy.y);
 				if (dist < enemy.radius + projectile.radius) {
 					// Hit
 					const numberOfParticles = Math.random() * enemy.radius / 2 + projectile.radius / 2;
@@ -134,17 +134,18 @@ export class Enemy {
 						} else {
 							particleSize = Math.random() * projectile.radius;
 						}
+						const particleVector: Vector = {
+							x: projectile.vector.x,
+							y: projectile.vector.y,
+							dx: (Math.random() - 0.5) * projectile.radius,
+							dy: (Math.random() - 0.5) * projectile.radius
+						};
 						Enemy.particles.push(
 							new Particle(
-								projectile.x,
-								projectile.y,
+								context,
+								particleVector,
 								particleSize,
 								'yellow',
-								{
-									x: (Math.random() - 0.5) * projectile.radius,
-									y: (Math.random() - 0.5) * projectile.radius
-								},
-								context
 							)
 						);
 					}
@@ -175,6 +176,5 @@ export class Enemy {
 				}
 			});
 		});
-		return gameOver;
 	}
 }

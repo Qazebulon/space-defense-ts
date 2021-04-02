@@ -1,20 +1,17 @@
+import { CanvasObject } from '../utility/canvasObject';
+import type { Vector } from '../utility/types';
 import { Projectile } from '../utility/projectile';
-import type { AmmoType } from './ammo';
+import type { Ammo } from './types';
 
-export class Blaster {
+export class Blaster extends CanvasObject {
 	colors = ['black', 'red', 'orange', 'yellow', 'light-green', 'blue', 'purple', 'white'];
-	context: any;
-	x: number;
-	y: number;
 	isTriggerDown: boolean;
 	isAmmoReady: boolean;
-	ammo: AmmoType;
-	targetingVector: any;
+	ammo: Ammo;
+	targetingVector: Vector;
 	projectiles: Projectile[];
-	constructor(context: any, x: number, y: number) {
-		this.context = context;
-		this.x = x;
-		this.y = y;
+	constructor(context: any, vector: Vector, radius: number) {
+		super(context, vector, radius, 'red');
 		this.isTriggerDown = false;
 		this.isAmmoReady = true;
 		this.ammo = {
@@ -23,7 +20,7 @@ export class Blaster {
 			coolDown: {value: 1000, cost: 75, level: 1, max: 19},
 			color: {value: this.colors[1], cost: 1000, level: 1, max: 7}
 		};
-		this.targetingVector = { x: 0, y: 5 };
+		this.targetingVector = {x:this.vector.x, y:this.vector.y, dx:0, dy:1};
 		this.projectiles = [];
 
 		// Projectile Control
@@ -38,6 +35,24 @@ export class Blaster {
 		});
 	}
 
+	draw(): void {
+		this.context.beginPath();
+		this.context.arc(this.vector.x, this.vector.y, this.radius, 0, Math.PI * 2, true);
+		this.context.fillStyle = this.ammo.color.value;
+		this.context.fill();
+		// let img = new Image();
+		// let x = this.vector.x;
+		// let y = this.vector.y;
+		// let d = this.radius * 4;
+		// let o = d / 2;
+		// let context = this.context;
+		// img.src = './blaster.svg';
+		// img.onload = function() {
+		// 	context.drawImage(img, x - o, y - o, d, d);
+		// };
+	}
+
+
 	triggerDown(): void {
 		this.isTriggerDown = true;
 		this.attemptToFireProjectile();
@@ -46,11 +61,9 @@ export class Blaster {
 		this.isTriggerDown = false;
 	}
 	targetChanged(event: any): void {
-		const angle = Math.atan2(event.clientY - this.y, event.clientX - this.x);
-		this.targetingVector = {
-			x: Math.cos(angle) * this.ammo.velocity.value,
-			y: Math.sin(angle) * this.ammo.velocity.value
-		};
+		const angle = Math.atan2(event.clientY - this.vector.y, event.clientX - this.vector.x);
+		this.targetingVector.dx = Math.cos(angle) * this.ammo.velocity.value;
+		this.targetingVector.dy = Math.sin(angle) * this.ammo.velocity.value
 	}
 	attemptToFireProjectile() {
 		if (this.isAmmoReady) {
@@ -70,11 +83,14 @@ export class Blaster {
 		setTimeout(() => (this.isAmmoReady = true), this.ammo.coolDown.value);
 
 		// Add new projectile
-		const p = new Projectile(this.x, this.y, this.ammo.size.value, this.ammo.color.value, this.targetingVector, this.context);
+		const projectileVector = {
+			x: this.targetingVector.x,
+			y: this.targetingVector.y,
+			dx: this.targetingVector.dx,
+			dy: this.targetingVector.dy,
+		}
+		const p = new Projectile(this.context, projectileVector, this.ammo.size.value, this.ammo.color.value);
 		setTimeout(() => this.projectiles.push(p), 0);
-	}
-	checkUpgrade(score: number): void {
-		console.log('upgrade?');
 	}
 
 	updateProjectiles(boundX: number, boundY: number): number {
@@ -83,10 +99,10 @@ export class Blaster {
 		this.projectiles.forEach((projectile, index) => {
 			projectile.update();
 			if (
-				projectile.x + projectile.radius < 0 ||
-				projectile.x > boundX + projectile.radius ||
-				projectile.y + projectile.radius < 0 ||
-				projectile.y > boundY + projectile.radius
+				projectile.vector.x + projectile.radius < 0 ||
+				projectile.vector.x > boundX + projectile.radius ||
+				projectile.vector.y + projectile.radius < 0 ||
+				projectile.vector.y > boundY + projectile.radius
 			) {
 				// remove projectile
 				this.projectiles.splice(index, 1);

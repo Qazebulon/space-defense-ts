@@ -6,7 +6,7 @@ const upgradeROFBtn: any = document.querySelector('#upgradeROFBtn');
 export class Points {
 	value: number;
 	constructor() {
-		this.value = 0;
+		this.value = 1000;
 		pointsEl!.innerHTML = '0';
 	}
 	clearPoints() {

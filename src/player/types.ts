@@ -1,4 +1,4 @@
-export type AmmoType = {
+export type Ammo = {
 	size: {
 		value: number;
 		cost: number;
