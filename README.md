@@ -3,7 +3,7 @@
 ## Version 0.2
 
 ### Objective
-You are the blue circle in the center of the screen. The objective of the game is to prevent the enemies from touching you. You can hold down the mouse button or press space bar to fire and aim by moving the mouse. Each hit will damage the enemy and make it smaller until it is destroyed. Enemies spawn at the edges of the screen and move towards the center. When you earn enough points, upgrade options will show up at the bottom of the screen. You can purchase upgrades by clicking on them or pressing a or d on the keyboard for upgrading projectile size or rate of fire respectively.
+You are the circle in the center of the screen. The objective of the game is to prevent the enemies from touching you. You can hold down the mouse button or press space bar to fire and aim by moving the mouse. Each hit will damage the enemy and make it smaller until it is destroyed. Enemies spawn at the edges of the screen and move towards the center. When you earn enough points, upgrade options will show up at the bottom of the screen. You can purchase upgrades by clicking on them or pressing a or d on the keyboard for upgrading projectile size or rate of fire respectively.
 
 ### Scoring
 You gain points per hit and another bonus points per enemy destroyed, but loss points if your shot gets to the edge of the map without hitting an enemy (miss).
